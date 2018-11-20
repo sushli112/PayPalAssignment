@@ -1,0 +1,115 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <link
+      rel="icon"
+      href="src/img/cartIcon.png"
+      type="image/jpg"
+      sizes="16x16"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <title>YOUR CART</title>
+  </head>
+  <body>
+    <h1 id="cartHeader">YOUR SHOPPING BAG</h1>
+    <main id="ShoppingCart"></main>
+    <script id="itemTemplate" type="text/x-handlebars-template">
+                   <div class="shopping-cart">
+                       <div class="column-labels">
+                           <label class="product-image boldLabel"> {{itemList.length}} ITEMS</label>
+                           <label class="product-details">Product</label>
+                           <label class="itemNumber">Item Number</label>
+                           <label class="total-price">Total</label>
+                       </div>
+                   {{#each itemList}}
+                       <div class="product">
+                           <div class="product-image">
+                           <img id="image" src="{{image}}" alt="item image" data-toggle="modal" data-target="#itemView"/>
+                           </div>
+                           <div class="product-details">
+                           <div id ="itemName" class="product-title">{{name}}</div>
+                           </div>
+                           <div id="itemNumber" class="description">{{description}}</div>
+                           <div id ="price" class="total-price">{{price}}</div>
+                       </div>
+               {{/each}}
+         </div>
+       <div class="totals">
+         <div class="totals-item">
+               <label>SUBTOTAL</label>
+               <div class="totals-value" id="cart-shipping">{{totalValue}}</div>
+           </div>
+      </div>
+
+      <div id="confirm" class="hidden">
+       <div>Ship to:</div>
+       <table>
+         <tr><td><label for="text">First Name :</label></td>
+             <td><input type="text" id="recipientFirstName" value="{{firstName}}"/></td></tr>
+         <tr><td><label for="text">Last Name :</label></td>
+              <td><input type="text" id="recipientLastName" value="{{lastName}}"/></td></tr>
+         <tr><td><label for="email">Email :</label></td>
+              <td><input type="email" id="email" value="{{email}}"/></td></tr>
+         <tr><td><label for="phone">Contact No: :</label></td>
+              <td><input type="tel" id="phone" value="{{contact}}"/></td></tr>
+         <tr><td><label for="city">City :</label></td>
+              <td><input id="city" type="text" value="{{city}}"></td></tr>
+         <tr><td><label for="zip">Zip:</label></td>
+              <td> <input type="text" id="zip"/ value="{{zip}}"></td></tr>
+         <tr><td><label for="state">State : </label></td>
+              <td><input type="text" id="state" value="{{state}}"/></td></tr>
+         <tr><td><label for="country">Country : </label></td>
+              <td><input type="text" id="country" value="{{country}}"></td></tr>
+       </table>
+       </div>
+       </div>
+    </script>
+  </body>
+</html>
+
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+<div id="paypal-button"></div>
+
+<script>
+  paypal.Button.render(
+    {
+      env: "sandbox", // Or 'production'
+      // Set up the payment:
+      // 1. Add a payment callback
+      payment: function(data, actions) {
+        // 2. Make a request to your server
+        return actions.request
+          .post("/api/create-payment/")
+          .then(function(res) {
+            // 3. Return res.id from the response
+            return res.id;
+          });
+      },
+      // Execute the payment:
+      // 1. Add an onAuthorize callback
+      onAuthorize: function(data, actions) {
+        // 2. Make a request to your server
+        return actions.request
+          .post("/api/execute-payment/", {
+            paymentID: data.paymentID,
+            payerID: data.payerID
+          })
+          .then(function(res) {
+            // 3. Show the buyer a confirmation message.
+            window.alert("transaction successfull");
+          });
+      }
+    },
+    "#paypal-button"
+  );
+</script>

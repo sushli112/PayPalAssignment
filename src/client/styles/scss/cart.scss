@@ -1,0 +1,177 @@
+#ShoppingCart,
+#cartHeader,
+#cartDetails {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+#cartHeader {
+  margin-top: 1%;
+}
+#ShoppingCart {
+  margin-top: 3%;
+}
+
+a:hover,
+.product-image:hover {
+  cursor: pointer;
+}
+header {
+  height: 10%;
+}
+
+$color-border: #eee;
+$color-label: #aaa;
+$font-default: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+  Helvetica, Arial, sans-serif;
+$font-bold: "HelveticaNeue-Medium", "Helvetica Neue Medium";
+
+/* Global "table" column settings */
+.product-image {
+  float: left;
+  width: 20%;
+}
+.product-details {
+  float: left;
+  width: 37%;
+}
+.itemNumber {
+  float: left;
+  width: 12%;
+}
+.product-quantity {
+  float: left;
+  width: 10%;
+}
+.product-line-price {
+  float: left;
+  width: 12%;
+  text-align: right;
+}
+
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  zoom: 1;
+}
+
+/* Apply clearfix in a few places */
+.shopping-cart,
+.column-labels,
+.product,
+.totals-item {
+  @extend .group;
+}
+
+/* Apply dollar signs */
+.product .total-price:before,
+.totals-value:before {
+  content: "$";
+}
+
+/* Body/Header stuff */
+body {
+  padding: 0px 30px 30px 20px;
+  font-family: $font-default;
+  font-weight: 100;
+}
+
+h1 {
+  font-weight: 100;
+}
+
+label {
+  color: $color-label;
+}
+
+.shopping-cart {
+  margin-top: -45px;
+}
+
+/* Column headers */
+.column-labels {
+  label {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid $color-border;
+  }
+
+  .product-details {
+    text-indent: -9999px;
+  }
+}
+
+/* Product entries */
+.product {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $color-border;
+
+  .product-image {
+    text-align: center;
+    img {
+      width: 100px;
+    }
+  }
+
+  .product-details {
+    .product-title {
+      margin-right: 20px;
+      font-family: $font-bold;
+    }
+    .product-description,
+    .product-color {
+      margin: 5px 20px 5px 0;
+      line-height: 1.4em;
+    }
+  }
+
+  .product-quantity {
+    input {
+      width: 40px;
+    }
+  }
+}
+
+/* Totals section */
+.totals {
+  .totals-item {
+    float: right;
+    width: 80%;
+    margin-bottom: 10px;
+
+    label {
+      float: left;
+      clear: both;
+      width: 63%;
+      text-align: right;
+    }
+
+    .totals-value {
+      float: right;
+      width: 13%;
+      text-align: right;
+    }
+  }
+}
+
+label {
+  color: #151617;
+}
+
+.shopping-cart {
+  font-size: 1.3rem;
+  .column-labels,
+  .product {
+    font-size: 1.5rem;
+  }
+}
+
+.button-container {
+  margin-left: 20rem;
+}

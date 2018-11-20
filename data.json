@@ -1,0 +1,23 @@
+{
+  "items": {
+    "item_list": [
+      {
+        "name": "hat",
+        "description": "Brown hat.",
+        "quantity": "5",
+        "price": "3",
+        "currency": "USD"
+      }
+    ],
+    "shipping_address": {
+      "recipient_name": "Brian Robinson",
+      "line1": "4th Floor",
+      "line2": "Unit #34",
+      "city": "San Jose",
+      "country_code": "US",
+      "postal_code": "95131",
+      "phone": "011862212345678",
+      "state": "CA"
+    }
+  }
+}
